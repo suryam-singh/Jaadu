@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Sound Sampler</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="crt">
+    <div class="grid-container">
+        <!-- Top Left -->
+        <div class="panel top-left">
+            <div class="title">RECEIVING</div>
+            <div class="line-container">
+                <div class="signal-plane-wrapper">
+                    <canvas id="receiving-canvas" class="signal-canvas active"></canvas>
+                    <div class="signal-wave receiving-wave active">
+                        <svg viewBox="0 0 200 10" preserveAspectRatio="none">
+                            <path id="receiving-wave-path" fill="none" stroke="#00ff00" stroke-width="2"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel top-right">
+            <div class="title">SENDING</div>
+            <div class="line-container">
+                <div class="signal-plane-wrapper">
+                    <canvas id="sending-canvas" class="signal-canvas"></canvas>
+                    <div class="signal-wave sending-wave" id="sending-wave">
+                        <svg viewBox="0 0 200 10" preserveAspectRatio="none">
+                            <path id="sending-wave-path" fill="none" stroke="#00ff00" stroke-width="2"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <button id="info-btn" class="info-btn">i</button>
+        </div>
+
+        <!-- Bottom Left -->
+        <div class="panel bottom-left">
+            <div class="radar-container" id="radar">
+                <div class="radar-circle"></div>
+                <div class="radar-ellipse radar-ellipse-1"></div>
+                <div class="radar-ellipse radar-ellipse-2"></div>
+                <div class="radar-scanner">
+                    <div class="radar-noise"></div>
+                    <div class="radar-line"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Right -->
+        <div class="panel bottom-right">
+            <div class="data-group-left">
+                <div>UPLINE - <span id="upline-status">YES</span></div>
+                <div>AZIR. - <span id="azir-val">49&deg;</span></div>
+                <div>INC. - <span id="inc-val">131&deg; POS</span></div>
+                <div>DEC - <span id="dec-val">25&deg; NEG</span></div>
+                <div class="signal-row">
+                    SIGNAL - <span id="signal-val">46</span> <div class="signal-box"></div>
+                </div>
+            </div>
+            <div class="data-group-right">
+                <div><span class="key-label">C:</span> <span class="key-val" id="val-c">00089</span></div>
+                <div><span class="key-label">V:</span> <span class="key-val" id="val-v">00047</span></div>
+                <div><span class="key-label">B:</span> <span class="key-val" id="val-b">00075</span></div>
+                <div><span class="key-label">N:</span> <span class="key-val" id="val-n">00014</span></div>
+                <div><span class="key-label">M:</span> <span class="key-val" id="val-m">00469</span></div>
+            </div>
+        </div>
+
+        <!-- Footer + Progress -->
+        <div class="panel footer">
+            <div class="footer-left">
+                <div class="sequence-prompt" id="sequence-prompt">PRESS : C</div>
+                <div class="volume-control">
+                    <button id="mute-btn" class="vol-btn">
+                        <svg class="speaker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path class="vol-waves" d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                            <line class="vol-mute-line" x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
+                    </button>
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="1">
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-title">PROGRESS</div>
+                <div class="progress-bar-bg">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+            <div class="fullscreen-btn" id="fullscreen-btn" style="cursor: pointer;">[ ENGAGE FULLSCREEN ]</div>
+        </div>
+    </div>
+    
+    <!-- Completion Popup -->
+    <div class="overlay" id="completion-overlay">
+        <div class="popup">
+            <h1 class="glitch-text" data-text="Your coordinates received!">Your coordinates received!</h1>
+            <div class="popup-image-container">
+                <img src="Images/Cat.png" alt="Jaadu Cat">
+            </div>
+            <h2 class="glitch-text" data-text="Jaadu will visit you soon.">Jaadu will visit you soon.</h2>
+            <button class="reset-btn" id="reset-btn">Reset</button>
+        </div>
+    </div>
+    
+    <!-- Info Modal -->
+    <div class="overlay" id="info-overlay">
+        <div class="popup info-popup">
+            <h2 class="glitch-text" data-text="SYSTEM INFO">SYSTEM INFO</h2>
+            <div class="info-content">
+                <p>Created by : Suryam Singh</p>
+                <p>Instagram : <a href="https://instagram.com/suryam_singh" target="_blank">suryam_singh</a></p>
+            </div>
+            <button class="reset-btn" id="close-info-btn">Close</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
